@@ -1,24 +1,25 @@
 package com.example.quotesbe.controller;
 
+import com.example.quotesbe.config.MyBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
-@RequestMapping("/quotes")
+@RequestMapping( "/quotes")
 public class Quotes {
 
-    private final List<String> quotesList = new ArrayList<>();
+    @Autowired
+    ApplicationContext context;
 
-    @GetMapping("/random")
+
+    @GetMapping( "random")
     public String getRandomQuote(){
-        quotesList.add("Du är fin");
-
-        return quotesList.get(0);
+        MyBean bean = context.getBean(MyBean.class);
+        return bean.getQuote();
     }
 
 
