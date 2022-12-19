@@ -1,4 +1,5 @@
-FROM openjdk:11 AS build-stage
+ARG VARIANT=17-bullseye
+FROM mcr.microsoft.com/vscode/devcontainers/java:0-${VARIANT}
 WORKDIR /build
 COPY ./mvnw .
 COPY ./.mvn/ .mvn/
@@ -11,4 +12,4 @@ FROM openjdk:11
 WORKDIR /app
 COPY --from=build-stage /build/target/api-*jar /app/QuotesBE.jar
 EXPOSE 8080
-CMD ["java", "-jar", "api.jar"]
+CMD ["java", "-jar", "QuotesBE.jar"]
