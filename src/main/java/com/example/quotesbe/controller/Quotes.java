@@ -19,7 +19,7 @@ public class Quotes {
     @GetMapping( "random")
     public String getRandomQuote(){
         MyBean bean = context.getBean(MyBean.class);
-        return bean.getQuote();
+        return bean.getQuote() + ":)";
     }
 
 
